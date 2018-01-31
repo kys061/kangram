@@ -183,7 +183,6 @@ typings/
 
 
 
-
 ### Windows template
 # Windows thumbnail cache files
 Thumbs.db
@@ -300,6 +299,8 @@ tags
 pyvenv.cfg
 pip-selfcheck.json
 
+### webstorm env
+.idea
 
 
 

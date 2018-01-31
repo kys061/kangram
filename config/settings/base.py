@@ -45,7 +45,6 @@ DJANGO_APPS = [
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
-    'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
@@ -56,6 +55,7 @@ LOCAL_APPS = [
     # custom users app
     'kangram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'kangram.images.apps.ImagesConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -111,7 +111,15 @@ MANAGERS = ADMINS
 # Uses django-environ to accept uri format
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///kangram'),
+    # 'default': env.db('DATABASE_URL', default='postgres:///kangram'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kangram',
+        'USER': 'yskang',
+        'PASSWORD': 'qwer1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
