@@ -13,6 +13,7 @@ class ImageAdmin(admin.ModelAdmin):
         'location',
         'caption',
         'creator',
+        # 'tags',
     )
     search_fields = ('location', 'caption', 'creator__username',)
     # autocomplete_fields = ('location',)

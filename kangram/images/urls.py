@@ -50,9 +50,15 @@ urlpatterns = [
     ),
     # delete
     url(
-        regex=r'comments/(?P<comment_id>\d+)/$',
+        regex=r'^comments/(?P<comment_id>\d+)/$',
         view=views.Comment.as_view(),
         name='comment'
+    ),
+    url(
+        regex=r'^search/$',
+        view=views.Search.as_view(),
+        name='search'
+
     ),
     # for testing query parameters...
     url(
