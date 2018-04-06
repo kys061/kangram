@@ -83,6 +83,21 @@ class UserFollowers(APIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+
+class UserFollowing(APIView):
+
+    @classmethod
+    def get(cls, request, username, format=None):
+        try:
+            found_user = models.User.objects.get(username=username)
+        except models.User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        print(found_user)
+        user_following = found_user.following.all()
+        serializer = serializers.ListUserSerializer(user_following, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 # class UserDetailView(LoginRequiredMixin, DetailView):
 #     model = User
 #     # These next two lines tell the view to index lookups by username
