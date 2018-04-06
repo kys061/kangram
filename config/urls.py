@@ -14,6 +14,7 @@ urlpatterns = [
 
     # User management
     url(r'^users/', include('kangram.users.urls', namespace='users')),
+    url(r'^images/', include('kangram.images.urls', namespace='images')),
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
