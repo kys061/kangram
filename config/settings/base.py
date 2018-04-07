@@ -58,6 +58,7 @@ LOCAL_APPS = [
     'kangram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'kangram.images.apps.ImagesConfig',
+    'kangram.notifications.apps.NotificationsConfig'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

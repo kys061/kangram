@@ -32,7 +32,7 @@ class Image(TimeStampedModel):
         return self.comments.all().count()
 
     def __str__(self):
-        return 'loc: {}, cap: {}'.format(self.location, self.caption)
+        return 'loc: {}, cap: {}, creator: {}'.format(self.location, self.caption, self.creator)
 
     class Meta:
         ordering = ['-created_at']
