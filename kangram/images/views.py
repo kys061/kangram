@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from kangram.notifications import views as notification_views
+
 
 from . import models, serializers
 # Create your views here.
@@ -71,7 +73,11 @@ class LikeImage(APIView):
         try:
             existing_like = models.Like.objects.get(creator=user, image=image_founded)
         except models.Like.DoesNotExist:
-            models.Like.objects.create(creator=user, image=image_founded)
+            new_like = models.Like.objects.create(creator=user, image=image_founded)
+            new_like.save()
+            notification_views.create_notification(
+                user, image_founded.creator,
+                'like', image_founded)
             return Response(status=status.HTTP_201_CREATED)
         else:
             # existing_like.delete()
@@ -112,6 +118,10 @@ class CommentOnImage(APIView):
         if serializer.is_valid():
             print ("valid")
             serializer.save(creator=user, image=image_founded)
+            notification_views.create_notification(
+                user, image_founded.creator, 'comment',
+                image_founded, serializer.data['message'])
+
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
