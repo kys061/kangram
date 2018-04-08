@@ -3,42 +3,44 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from kangram.notifications import views as notification_views
-
+from kangram.users import models as user_models
+from kangram.users import serializers as user_serializers
 
 from . import models, serializers
 # Create your views here.
 
 
-class ListAllImages(APIView):
-
-    def get(self, request, format=None):
-        all_images = models.Image.objects.all()
-        serializer = serializers.ImageSerializer(all_images, many=True)
-
-        return Response(data=serializer.data)
-
-
-class ListAllComments(APIView):
-
-    def get(self, request, format=None):
-        all_comments = models.Comment.objects.all()
-        serializer = serializers.CommentSerializer(all_comments, many=True)
-
-        return Response(data=serializer.data)
-
-
-class ListAllLikes(APIView):
-
-    def get(self, request, format=None):
-        all_likes = models.Like.objects.all()
-        serializer = serializers.LikeSerializer(all_likes, many=True)
-
-        return Response(data=serializer.data)
+# class ListAllImages(APIView):
+#
+#     def get(self, request, format=None):
+#         all_images = models.Image.objects.all()
+#         serializer = serializers.ImageSerializer(all_images, many=True)
+#
+#         return Response(data=serializer.data)
+#
+#
+# class ListAllComments(APIView):
+#
+#     def get(self, request, format=None):
+#         all_comments = models.Comment.objects.all()
+#         serializer = serializers.CommentSerializer(all_comments, many=True)
+#
+#         return Response(data=serializer.data)
+#
+#
+# class ListAllLikes(APIView):
+#
+#     def get(self, request, format=None):
+#         all_likes = models.Like.objects.all()
+#         serializer = serializers.LikeSerializer(all_likes, many=True)
+#
+#         return Response(data=serializer.data)
 
 
 class Feed(APIView):
 
-    def get(self, request, format=None):
+    @classmethod
+    def get(cls, request, format=None):
         user = request.user
         following_users = user.following.all()
         image_list = []
@@ -69,6 +71,19 @@ class Feed(APIView):
 class LikeImage(APIView):
 
     @classmethod
+    def get(cls, request, image_id, format=None):
+        # get likes model that id in image obj is image_id requested
+        likes = models.Like.objects.filter(image__id=image_id)
+        # get creator_id in likes obj
+        like_creators_ids = likes.values('creator_id')
+        # get users id is like_creators_ids
+        users = user_models.User.objects.filter(id__in=like_creators_ids)
+        # serialize model obj to json
+        serializer = user_serializers.ListUserSerializer(users, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @classmethod
     def post(cls, request, image_id, format=None):
         user = request.user
         try:
@@ -90,6 +105,7 @@ class LikeImage(APIView):
 
 
 class UnLikeImage(APIView):
+
     @classmethod
     def delete(cls, request, image_id, format=None):
         user = request.user
@@ -148,7 +164,8 @@ class Comment(APIView):
 
 class Search(APIView):
 
-    def get(self, request, format=None):
+    @classmethod
+    def get(cls, request, format=None):
 
         hashtags = request.query_params.get('hashtags', None)
 
@@ -168,6 +185,7 @@ class Search(APIView):
 
 
 class ModerateComments(APIView):
+
     @classmethod
     def delete(cls, request, image_id, comment_id, format=None):
 
