@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',  # registration
     'rest_framework',   # REST framework
     'taggit', # tags for image
+    'taggit_serializer',  # tag serializer
 ]
 
 # Apps specific for this project go here.
@@ -296,3 +297,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+REST_USE_JWT = True
