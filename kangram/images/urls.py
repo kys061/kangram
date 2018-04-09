@@ -27,7 +27,7 @@ urlpatterns = [
     # GET
     url(
         regex=r'^$',
-        view=views.Feed.as_view(),
+        view=views.Images.as_view(),
         name='feed'
     ),
     url(
