@@ -40,6 +40,7 @@ pylint = "*"
 djangorestframework = "*"
 django-taggit = "*"
 djangorestframework-jwt = "*"
+django-taggit-serializer = "*"
 
 
 [dev-packages]
