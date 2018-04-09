@@ -39,6 +39,7 @@ pytest-sugar = "==0.9.0"
 pylint = "*"
 djangorestframework = "*"
 django-taggit = "*"
+djangorestframework-jwt = "*"
 
 
 [dev-packages]
