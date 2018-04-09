@@ -76,4 +76,14 @@ class ImageSerializer(serializers.ModelSerializer):
         )
 
 
+class InputImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+            'location',
+            'caption',
+        )
+
 

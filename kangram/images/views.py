@@ -202,10 +202,17 @@ class ModerateComments(APIView):
 
 
 class ImageDetail(APIView):
+
+    @classmethod
+    def find_own_image(cls, image_id, user):
+        try:
+            image = models.Image.objects.get(id=image_id, creator=user)
+            return image
+        except models.Image.DoesNotExist:
+            return None
+
     @classmethod
     def get(cls, request, image_id, format=None):
-
-        user = request.user
 
         try:
             image = models.Image.objects.get(id=image_id)
@@ -215,6 +222,39 @@ class ImageDetail(APIView):
         serializer = serializers.ImageSerializer(image)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @classmethod
+    def put(cls, request, image_id, format=None):
+
+        user = request.user
+        image = cls.find_own_image(image_id, user)
+
+        if image is None:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        serializer = serializers.InputImageSerializer(
+                        image, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save(creator=user)
+            return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @classmethod
+    def delete(cls, request, image_id, format=None):
+
+        user = request.user
+
+        image = cls.find_own_image(image_id, user)
+
+        if image is None:
+
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        image.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ParamTest(APIView):
