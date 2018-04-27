@@ -5,6 +5,7 @@ import store from "redux/configureStore";
 import "index.css";
 import App from "App";
 
+store.dispatch({ type: "HELLO" });
 
 ReactDOM.render(
   <Provider store={store}>
