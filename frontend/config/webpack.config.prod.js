@@ -183,6 +183,7 @@ module.exports = {
                         importLoaders: 1,
                         minimize: true,
                         localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                        camelCase: "dashes",
                         module: true,
                         sourceMap: shouldUseSourceMap,
                       },
@@ -211,7 +212,8 @@ module.exports = {
                     {
                         loader: require.resolve('sass-loader'),
                         options:{
-                            sourceMap: true
+                            sourceMap: true,
+                            data: `@import "${paths.appSrc}/config/_variables.scss";`
                         }
                     }
                   ],

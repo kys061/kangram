@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import styles from './styles.scss';
+import { connect } from 'react-redux';
+import Container from './container';
+const MapStateToProps = (state, ownProps) => {
 
-class App extends Component {
-  render() {
-    return <div className={styles.App} />;
-  }
-}
+    const { user } = state;
+    return {
+        isLoggedIn: user.isLoggedIn
+    };
+};
 
-export default App;
+export default connect(MapStateToProps)(Container);
