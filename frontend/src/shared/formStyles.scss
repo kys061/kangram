@@ -7,24 +7,25 @@
     display: flex;
     flex-direction: column;
     input[type="submit"] {
-      margin-top: 10px;
+      //margin-top: 10px;
     }
     .text-input {
       border: 1px solid #efefef;
       border-radius: 3px;
-      background-color: $bg-color;
+      background-color: white;
       margin-bottom: 5px;
       font-size: $normal-font-size;
       padding: 9px 0 7px 8px;
       font-weight: 400;
       &:focus {
         outline: none;
-        border: 1px solid #b2b2b2;
+    //    border: 1px solid #b2b2b2;
       }
     }
   }
   .button {
     @include blueButton();
+    margin-top: 10px;
     svg  {
       margin-right: 10px;
     }
@@ -58,13 +59,21 @@
     }
   }
   .facebook-link {
-    display: flex;
-    align-items: center;
+    //display: flex;
+    //align-items: center;
+    background-color: $bg-color;
     color: #385185;
+    border: 0px;
+    font-size: $normal-font-size;
     justify-content: center;
     margin-bottom: 25px;
-    svg {
+    cursor: pointer;
+    i {
       margin-right: 5px;
+    }
+    &:focus,
+    &:active{
+      outline: none;
     }
   }
   .forgot-link {

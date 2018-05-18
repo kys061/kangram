@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Language: es"
+
+#: src/components/Auth/presenter.js
+msgid "Have an account?"
+msgstr ""
+
+#: src/components/Auth/presenter.js
+msgid "Don't have an account?"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "About Us"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Support"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Blog"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Press"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "API"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Jobs"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Privacy"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Terms"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Directory"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Language"
+msgstr ""
+
