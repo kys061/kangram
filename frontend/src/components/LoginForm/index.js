@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Container from "./container";
+import { actionCreators as userActions } from "redux/module/user";
 
 // Add all the actions for:
 // Log in
@@ -8,4 +9,13 @@ import Container from "./container";
 // Check username
 // Check password
 
-export default connect()(Container);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    facebookLogin: access_token => {
+      dispatch(userActions.facebookLogin(access_token));
+    }
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(Container);
